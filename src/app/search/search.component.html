@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<center>
+
+  <div class="container">
+    <h1>Provider Search Form</h1>
+    <span class="container">
+      Welcome to the Provider Search Form!
+      <br/>
+      Searching with more than one field at a time will narrow the results to records that match all of the specified criteria.  
+      </span>
+  </div>
+  <br />
+  <div class="container">
+    <table class="table table-striped">
+      <thead align="left">
+        <tr>
+          <th>Search By Federal Provider Number</th>
+          <th>Search By Provider Name &nbsp;&nbsp;<font style="font:10pt arial;font-weight:bold;">(you can search using a partial names)</font></th>
+          <th>Search By Provider Zip Code</th>
+          <th><button (click)="clearSearch()">Clear Search</button></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input [(ngModel)]="provider.federal_provider_number" placeholder=" search by provider#" /></td>
+          <td><input style="width:400px;" [(ngModel)]="provider.provider_name" placeholder=" search by provider name" /></td>
+          <td><input [(ngModel)]="provider.provider_zip_code" placeholder=" search by provider zip" /></td>
+          <td><button (click)="executeSearch()">Search</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</center>
+<hr style="width:100%;height:1px;" />
+<center><h2>Provider Search Results:</h2></center>
+
+<mat-table  [dataSource]="providers" matSort matSortActive="federal_provider_number" matSortDirection="asc" (matSortChange)="sortChange($event)" matSortDisableClear>
+
+  <ng-container matColumnDef="federal_provider_number">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      federal_provider_number
+    </mat-header-cell>
+    <mat-cell *matCellDef="let provider">{{provider.federal_provider_number}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="provider_name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>provider_name</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let provider">{{provider.provider_name}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="provider_address">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>provider_address</mat-header-cell>
+    <mat-cell class="duration-cell"
+              *matCellDef="let provider">{{provider.provider_address}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="provider_city">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>provider_city</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let provider">{{provider.provider_city}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="provider_state">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>provider_state</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let provider">{{provider.provider_state}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="provider_zip_code">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>provider_zip_code</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let provider">{{provider.provider_zip_code}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="provider_phone_number">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>provider_phone_number</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let provider">{{provider.provider_phone_number}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
+<mat-paginator [length]="providers?.length" [pageSize]="100"
+               [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
