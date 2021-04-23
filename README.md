@@ -12,9 +12,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ##------------------
 ##Overview
 Use Case:
-Angular application which can aggregate provider data from multiple data sources.
-This application will be querying external and internal data sources to provide relevant search details.
-Candidate is expected to use one such data source and query it real-time using the below provided data source: 
+Angular application which can aggregate provider data from the below provided data source: 
 https://data.medicare.gov/Nursing-Home-Compare/Provider-Info/4pq5-n9py
 Business Rules:
 1.	User should be able to search by one or more terms.
